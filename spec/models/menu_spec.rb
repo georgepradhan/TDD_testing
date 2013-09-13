@@ -1,11 +1,11 @@
 require 'spec_helper'
 describe Menu do
-  let(:menu) { FactoryGirl.build :menu }
+  let(:menu) { FactoryGirl.create :menu }
   context "validations" do
     it { should validate_presence_of :name }
     it { should validate_presence_of :start_at }
     it "end date must be after end date" do
-      pending
+      menu.end_at.should > menu.start_at
     end
   end
 

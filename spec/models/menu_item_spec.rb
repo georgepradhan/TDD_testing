@@ -8,10 +8,14 @@ describe MenuItem do
   end
 
   context "associations" do
-    it { pending }
+    it { should belong_to :menu }
   end
 
   context "#name" do
-    it { pending }
+    let(:test_menu_item) { FactoryGirl.create :menu_item }
+    it "returns the menu item's name" do 
+      test_menu_item.name 
+    end
   end
 end
+

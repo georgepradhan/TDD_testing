@@ -14,28 +14,54 @@ describe "Menus Controller", :type => :controller do
 
   context "create menu" do
     it "creates a menu with valid attributes" do
-      pending
+      expect {
+        post '/menus', params={ name: menu.name, description: menu.description, 
+      start_at: Time.now, end_at: Time.now + 1}
+      }.to change(Menu, :count).by(1)
+
+      # menu_count = Menu.count
+      # post '/menus', params={ name: "new_menu.name", description: menu.description, 
+      # start_at: Time.now, end_at: Time.now + 1}
+      # expect(Menu.count).to eq(menu_count + 1)
+
     end
     it "doesn't create a menu with invalid attributes" do
-      pending
+      menu_count = Menu.count
+      post '/menus', params={}
+      expect(Menu.count).to eq(menu_count)
     end
     it "shows errors" do
-      pending
+      post '/menus', params={}
+      expect(last_response.body).to include("Name can't be blank", 
+        "Start at can't be blank")
     end
   end
 
   context "show menu" do
     it "displays the menu name" do
-      pending
+      get "/menus/#{menu.id}"
+      expect(last_response.body).to include(menu.name)
     end
     it "displays the menu description" do
-      pending
+      get "/menus/#{menu.id}"
+      expect(last_response.body).to include(menu.description)
     end
     it "displays the menu start and end dates" do
-      pending
+      get "/menus/#{menu.id}"
+      expect(last_response.body).to include("#{menu.start_at}", "#{menu.end_at}")
     end
     it "displays a list of all menu items" do
-      pending
+      get "/menus/#{menu.id}"
+      items = menu.menu_items.map { |item| item.name }
+      items.length.times do |i|
+        expect(last_response.body).to include(items[i])
+      end
     end
   end
 end
+
+
+# ! vs no !????
+
+
+

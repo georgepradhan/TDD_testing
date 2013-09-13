@@ -1,2 +1,9 @@
 <h2><%= @menu.name %></h2>
 <p><%= @menu.description %></p>
+<p><%= @menu.start_at %></p>
+<p><%= @menu.end_at %></p>
+
+<% @menu.menu_items.each do |item| %>
+  <li><a href="/menus/<%=@menu.id%>/menu_items/<%=item.id%>"><%= item.name %></a></li>
+<% end %>
+
